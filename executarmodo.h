@@ -4,12 +4,16 @@
 #include "disciplinaturma.h"
 #include "aluno.h"
 #include <QTableWidget>
+#include <QDialog>
+#include <QObject>
 
 namespace Pedro
 {
 
-class ExecutarModo
+class ExecutarModo : public QDialog
 {
+    Q_OBJECT
+
 private:
     int infoCurso;
     Pedro::DisciplinaTurma infoDisciplinaTurma;
@@ -17,10 +21,11 @@ private:
 
 private slots:
     void receberInfo(int infoCurso);
+    void receberInfoDisciplina(Pedro::DisciplinaTurma disciplinaTurma);
 
 public:
     ExecutarModo();
-    QTableWidget* operator ()(QString textoComboBox);
+    void operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos);
     int getInfoCurso() const;
     void setInfoCurso(int newInfoCurso);
     Pedro::DisciplinaTurma getInfoDisciplinaTurma() const;

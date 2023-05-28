@@ -25,7 +25,24 @@ void DisciplinaTurma::setCodigoTurma(QString newCodigoTurma)
     codigoTurma = newCodigoTurma;
 }
 
+bool DisciplinaTurma::operator==(DisciplinaTurma otherDisciplinaTurma) const
+{
+    if (this->getCodigoDisciplina() == otherDisciplinaTurma.getCodigoDisciplina() && this->getCodigoTurma() == otherDisciplinaTurma.getCodigoTurma())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 DisciplinaTurma::operator QString() const
+{
+    return getDisciplinaTurma();
+}
+
+QString DisciplinaTurma::getDisciplinaTurma() const
 {
     return codigoDisciplina + "-" + codigoTurma;
 }

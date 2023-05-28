@@ -19,7 +19,9 @@ public:
     void setCodigoDisciplina(QString newCodigoDisciplina);
     QString getCodigoTurma() const;
     void setCodigoTurma(QString newCodigoTurma);
-    operator QString() const;
+    bool operator==(Pedro::DisciplinaTurma otherDisciplinaTurma) const;
+    operator QString()const;
+    QString getDisciplinaTurma() const;
 };
 
 }

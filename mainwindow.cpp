@@ -36,7 +36,7 @@ void MainWindow::on_pushButton_executarModo_clicked()
 {
     try {
         Pedro::ExecutarModo executarModo;
-        ui->tableWidget_output = executarModo(ui->comboBox_inputModo->currentText());
+        executarModo(ui->comboBox_inputModo->currentText(), ui->tableWidget_output, listaAluno);
     }
     catch (QString &erro) {
         QMessageBox::critical(this, "Erro", erro);

@@ -12,9 +12,15 @@ void Aluno::setMatricula(Pedro::Matricula newMatricula)
     matricula = newMatricula;
 }
 
-std::list<Pedro::DisciplinaTurma> Aluno::getDisciplinaTurma() const
+QString Aluno::getDisciplinaTurma()
 {
-    return disciplinaTurma;
+    std::list<Pedro::DisciplinaTurma>::iterator disciplinat;
+    QString saida = "";
+    for (disciplinat = disciplinaTurma.begin(); disciplinat != disciplinaTurma.end(); disciplinat++)
+    {
+        saida += disciplinat->getDisciplinaTurma() + " ";
+    }
+    return saida;
 }
 
 void Aluno::setDisciplinaTurma(std::list<Pedro::DisciplinaTurma> newDisciplinaTurma)
