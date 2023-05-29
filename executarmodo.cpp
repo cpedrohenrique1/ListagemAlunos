@@ -96,16 +96,15 @@ void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std:
         int cont = 0;
         for (it = listaAluno.begin(); it != listaAluno.end(); ++it)
         {
-            itDisciplina = it->disciplinaTurma.begin();
-            while (itDisciplina != it->disciplinaTurma.end())
+            itDisciplina = it->getListaDisciplinaTurma()->begin();
+            while (itDisciplina != it->getListaDisciplinaTurma()->end())
             {
-                    if (itDisciplina->getDisciplinaTurma() == infoDisciplinaTurma.getDisciplinaTurma())
-                    {
-                        parent->insertRow(cont);
-                        parent->setItem(cont, 0, new QTableWidgetItem(itDisciplina->getDisciplinaTurma()));
-                        parent->setItem(cont, 1, new QTableWidgetItem(infoDisciplinaTurma));
-                    }
-
+                if (itDisciplina->getDisciplinaTurma() == infoDisciplinaTurma.getDisciplinaTurma())
+                {
+                    parent->insertRow(cont);
+                    parent->setItem(cont, 0, new QTableWidgetItem(itDisciplina->getDisciplinaTurma()));
+                    parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
+                }
                 ++itDisciplina;
             }
         }

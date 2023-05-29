@@ -13,17 +13,18 @@ class Aluno
 {
 private:
     QString nomeCompleto;
+    std::list<Pedro::DisciplinaTurma> *disciplinaTurma;
     Pedro::Matricula matricula;
 public:
-    std::list<Pedro::DisciplinaTurma> disciplinaTurma;
     Aluno();
-    Aluno(QString nomeCompleto, std::list<Pedro::DisciplinaTurma> disciplinaTurma, Pedro::Matricula matricula);
+    Aluno(QString nomeCompleto, std::list<Pedro::DisciplinaTurma> *disciplinaTurma, Pedro::Matricula matricula);
     QString getNomeCompleto() const;
     void setNomeCompleto(QString newNomeCompleto);
     Pedro::Matricula getMatricula() const;
     void setMatricula(Pedro::Matricula newMatricula);
     QString getDisciplinaTurma();
-    void setDisciplinaTurma(std::list<Pedro::DisciplinaTurma> newDisciplinaTurma);
+    std::list<Pedro::DisciplinaTurma> *getListaDisciplinaTurma();
+    void setDisciplinaTurma(std::list<Pedro::DisciplinaTurma> *newDisciplinaTurma);
     Aluno getAluno() const;
 };
 

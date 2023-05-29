@@ -16,14 +16,19 @@ QString Aluno::getDisciplinaTurma()
 {
     std::list<Pedro::DisciplinaTurma>::iterator disciplinat;
     QString saida = "";
-    for (disciplinat = disciplinaTurma.begin(); disciplinat != disciplinaTurma.end(); disciplinat++)
+    for (disciplinat = disciplinaTurma->begin(); disciplinat != disciplinaTurma->end(); disciplinat++)
     {
         saida += disciplinat->getDisciplinaTurma() + " ";
     }
     return saida;
 }
 
-void Aluno::setDisciplinaTurma(std::list<Pedro::DisciplinaTurma> newDisciplinaTurma)
+std::list<DisciplinaTurma> *Aluno::getListaDisciplinaTurma()
+{
+    return disciplinaTurma;
+}
+
+void Aluno::setDisciplinaTurma(std::list<Pedro::DisciplinaTurma> *newDisciplinaTurma)
 {
     disciplinaTurma = newDisciplinaTurma;
 }
@@ -39,9 +44,9 @@ Aluno::Aluno():
   , matricula()
 {}
 
-Aluno::Aluno(QString nomeCompleto, std::list<DisciplinaTurma> disciplinaTurma, Matricula matricula):
+Aluno::Aluno(QString nomeCompleto, std::list<DisciplinaTurma> *newDisciplinaTurma, Matricula matricula):
     nomeCompleto(nomeCompleto)
-  , disciplinaTurma(disciplinaTurma)
+  , disciplinaTurma(newDisciplinaTurma)
   , matricula(matricula)
 {}
 

@@ -54,7 +54,7 @@ QString BuscarAluno::operator ()(QWidget *parent, std::list<Pedro::Aluno> &lista
 
         Pedro::Aluno aluno;
         entrada = "";
-        int indice;
+        int indice = 16;
         for (int i = 16; linha[i] != ';'; i++)
         {
             entrada += linha[i];
@@ -62,27 +62,28 @@ QString BuscarAluno::operator ()(QWidget *parent, std::list<Pedro::Aluno> &lista
         }
         aluno.setNomeCompleto(QString::fromStdString(entrada));
         indice+= 2;
-        std::list<Pedro::DisciplinaTurma> disciplina;
-        while (indice < linha.size() - 2)
+        std::list<Pedro::DisciplinaTurma> *disciplina = new std::list<Pedro::DisciplinaTurma>;
+        while (indice < linha.size() - 1)
         {
             if (linha[indice] == ' ')
             {
-                indice+= 2;
+                indice++;
             }
             else
             {
                 entrada = "";
-                while (linha[indice] != '-')
+                while (linha[indice] != '-' && linha[indice] != ' ' && indice < linha.size() - 1)
                 {
                     entrada += linha[indice++];
                 }
                 std::string codigodisciplina = entrada;
                 entrada = "";
-                while (linha[indice] != ' ' && indice != linha.size() - 2)
+                indice++;
+                while (linha[indice] != ' ' && indice < linha.size() - 1)
                 {
-                    entrada += linha[++indice];
+                    entrada += linha[indice++];
                 }
-                disciplina.push_back(Pedro::DisciplinaTurma(QString::fromStdString(codigodisciplina), QString::fromStdString(entrada)));
+                disciplina->push_back(Pedro::DisciplinaTurma(QString::fromStdString(codigodisciplina), QString::fromStdString(entrada)));
             }
         }
         aluno.setMatricula(matricula);

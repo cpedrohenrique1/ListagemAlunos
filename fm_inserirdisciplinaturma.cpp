@@ -18,9 +18,9 @@ void Fm_InserirDisciplinaTurma::on_pushButton_clicked()
 {
     try
     {
-        if (ui->lineEdit_inputCodigoDisciplina->text().isEmpty() || ui->lineEdit_inputCodigoTurma->text().isEmpty())
+        if (ui->lineEdit_inputCodigoDisciplina->text().isEmpty())
         {
-            throw QString("Nao pode estar nenhum vazio");
+            throw QString("Nao pode estar vazio");
         }
         emit infoTransmitida(Pedro::DisciplinaTurma(ui->lineEdit_inputCodigoDisciplina->text(), ui->lineEdit_inputCodigoTurma->text()));
         close();
