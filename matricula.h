@@ -29,6 +29,7 @@ public:
     void setNumeroVerificador(int newNumeroVerificador);
     Matricula getMatricula() const;
     operator QString() const;
+    bool operator ==(Pedro::Matricula matricula);
 };
 
 }

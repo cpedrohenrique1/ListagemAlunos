@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "matricula.h"
-#include "inserirmatricula.h"
 
 namespace Ui {
 class Fm_InserirMatricula;

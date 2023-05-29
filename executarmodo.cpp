@@ -119,6 +119,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
                     parent->insertRow(cont);
                     parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
                     parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
+                    cont++;
                 }
                 ++itDisciplina;
             }
@@ -146,33 +147,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
                     parent->insertRow(cont);
                     parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
                     parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
-                }
-                ++itDisciplina;
-            }
-        }
-    }
-
-    if (textoComboBox == "Todas as disciplinas de um aluno")
-    {
-        Fm_InserirMatricula f_inserirMatricula;
-        QObject::connect(&f_inserirMatricula, &Fm_InserirMatricula::infoTransmitida, this, &ExecutarModo::infoMatricula);
-        f_inserirMatricula.exec();
-        parent->setColumnCount(1);
-        QStringList cabecalho = {"Disciplinas"};
-        parent->setHorizontalHeaderLabels(cabecalho);
-        std::list<Pedro::Aluno>::iterator it;
-        std::list<Pedro::DisciplinaTurma>::iterator itDisciplina;
-        int cont = 0;
-        for (it = listaAluno.begin(); it != listaAluno.end(); ++it)
-        {
-            itDisciplina = it->getListaDisciplinaTurma()->begin();
-            while (itDisciplina != it->getListaDisciplinaTurma()->end())
-            {
-                if (itDisciplina->getCodigoDisciplina() == infoDisciplina)
-                {
-                    parent->insertRow(cont);
-                    parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
-                    parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
+                    cont++;
                 }
                 ++itDisciplina;
             }
@@ -180,6 +155,37 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
     }
     parent->setColumnWidth(0, 130);
     parent->setColumnWidth(1, 610);
+
+    if (textoComboBox == "Todas as disciplinas de um aluno")
+    {
+        Fm_InserirMatricula f_inserirMatricula;
+        QObject::connect(&f_inserirMatricula, &Fm_InserirMatricula::infoTransmitida, this, &ExecutarModo::receberInfoMatricula);
+        f_inserirMatricula.exec();
+        parent->setColumnCount(1);
+        QStringList cabecalho = {"Nome e disciplinas"};
+        parent->setHorizontalHeaderLabels(cabecalho);
+        std::list<Pedro::Aluno>::iterator it;
+        std::list<Pedro::DisciplinaTurma>::iterator itDisciplina;
+        int cont = 0;
+        for (it = listaAluno.begin(); it != listaAluno.end(); ++it)
+        {
+            if (it->getMatricula() == infoMatricula)
+            {
+                parent->insertRow(cont);
+                parent->setItem(cont, 0, new QTableWidgetItem(it->getNomeCompleto()));
+                cont++;
+                itDisciplina = it->getListaDisciplinaTurma()->begin();
+                while (itDisciplina != it->getListaDisciplinaTurma()->end())
+                {
+                    parent->insertRow(cont);
+                    parent->setItem(cont, 0, new QTableWidgetItem(itDisciplina->getDisciplinaTurma()));
+                    ++itDisciplina;
+                    cont++;
+                }
+            }
+        }
+        parent->setColumnWidth(0, 730);
+    }
     parent->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 

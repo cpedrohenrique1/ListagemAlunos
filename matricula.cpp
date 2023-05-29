@@ -53,6 +53,15 @@ Matricula::operator QString() const
     return QString::number(ano) + "." + QString::number(semestre) + "." + QString::number(nCurso) + "." + QString::number(numero) + QString::number(numeroVerificador);
 }
 
+bool Matricula::operator ==(Matricula matricula)
+{
+    if (this->ano == matricula.getAno() && this->semestre == matricula.getSemestre() && this->nCurso == matricula.getNCurso() && this->numero == matricula.getNumero() && this->numeroVerificador == matricula.getNumeroVerificador())
+    {
+        return true;
+    }
+    return false;
+}
+
 Matricula::Matricula():
         ano(0)
       , semestre(0)

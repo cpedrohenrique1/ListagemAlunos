@@ -7,39 +7,30 @@ InserirMatricula::InserirMatricula()
 
 Pedro::Matricula InserirMatricula::operator ()(QString matriculaText)
 {
-    QString saida = "";
-    int i = 0;
-    for (int i = 0; matriculaText[i] != '.'; i++)
+    QString entrada = "";
+    for (int i = 0; matriculaText[i] != '.' && i < matriculaText.size(); i++)
     {
-        saida += matriculaText[i];
+        entrada += matriculaText[i];
     }
     Pedro::Matricula matricula;
-    matricula.setAno(saida.toInt());
-    saida = "";
-    i++;
-    while (matriculaText[i] != '.')
+    matricula.setAno(entrada.toInt());
+    entrada = matriculaText[5];
+    matricula.setSemestre(entrada.toInt());
+    entrada = "";
+    for (int i = 7; matriculaText[i] != '.' && i < matriculaText.size(); i++)
     {
-        saida += matriculaText[i];
-        i++;
+        entrada += matriculaText[i];
     }
-    matricula.setSemestre(saida.toInt());
-    saida = "";
-    while(matriculaText[i] != '.')
+    matricula.setNCurso(entrada.toInt());
+
+    entrada = "";
+    for (int i = 11; i <= 13 && i < matriculaText.size(); i++)
     {
-        saida += matriculaText[i];
-        i++;
+        entrada += matriculaText[i];
     }
-    matricula.setNCurso(saida.toInt());
-    saida = "";
-    i++;
-    for (int j = 0; j < 3; j++)
-    {
-        saida += matriculaText[i];
-        i++;
-    }
-    matricula.setNumero(saida.toInt());
-    i++;
-    saida = matriculaText[i];
-    matricula.setNumeroVerificador(saida.toInt());
+    matricula.setNumero(entrada.toInt());
+
+    entrada = matriculaText[14];
+    matricula.setNumeroVerificador(entrada.toInt());
     return matricula;
 }
