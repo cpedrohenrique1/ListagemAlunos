@@ -16,6 +16,8 @@ SOURCES += \
     fm_inserircurso.cpp \
     fm_inserirdisciplina.cpp \
     fm_inserirdisciplinaturma.cpp \
+    fm_inserirmatricula.cpp \
+    inserirmatricula.cpp \
     main.cpp \
     mainwindow.cpp \
     matricula.cpp
@@ -28,6 +30,8 @@ HEADERS += \
     fm_inserircurso.h \
     fm_inserirdisciplina.h \
     fm_inserirdisciplinaturma.h \
+    fm_inserirmatricula.h \
+    inserirmatricula.h \
     mainwindow.h \
     matricula.h
 
@@ -35,6 +39,7 @@ FORMS += \
     fm_inserircurso.ui \
     fm_inserirdisciplina.ui \
     fm_inserirdisciplinaturma.ui \
+    fm_inserirmatricula.ui \
     mainwindow.ui
 
 # Default rules for deployment.

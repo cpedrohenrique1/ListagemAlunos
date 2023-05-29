@@ -7,6 +7,7 @@
 #include "aluno.h"
 #include <QTableWidget>
 #include "fm_inserirdisciplina.h"
+#include "fm_inserirmatricula.h"
 
 namespace Pedro
 {
@@ -20,11 +21,13 @@ private:
     Pedro::DisciplinaTurma infoDisciplinaTurma;
     Pedro::Aluno infoAluno;
     QString infoDisciplina;
+    Pedro::Matricula infoMatricula;
 
 private slots:
     void receberInfo(int infoCurso);
     void receberInfoDisciplinaTurma(Pedro::DisciplinaTurma disciplinaTurma);
     void receberInfoDisciplina(QString infoDisciplina);
+    void receberInfoMatricula(Pedro::Matricula infoMatricula);
 
 public:
     ExecutarModo();
