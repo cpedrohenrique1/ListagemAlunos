@@ -40,7 +40,12 @@ void ExecutarModo::receberInfo(int infoCurso)
     this->infoCurso = infoCurso;
 }
 
-void ExecutarModo::receberInfoDisciplina(Pedro::DisciplinaTurma disciplinaTurma)
+void ExecutarModo::receberInfoDisciplina(QString infoDisciplina)
+{
+    this->infoDisciplina = infoDisciplina;
+}
+
+void ExecutarModo::receberInfoDisciplinaTurma(Pedro::DisciplinaTurma disciplinaTurma)
 {
     this->infoDisciplinaTurma = disciplinaTurma;
 }
@@ -51,14 +56,21 @@ ExecutarModo::ExecutarModo():
   , infoAluno()
 {}
 
-void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAluno)
+void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAluno, QString enderecoArquivo)
 {
     parent->clearSelection();
     parent->setRowCount(0);
+
+    if (enderecoArquivo.isEmpty())
+    {
+        throw QString("Arquivo nao selecionado");
+    }
+
     if (textoComboBox == "Selecionar Modo...")
     {
-        throw QString("Selecione um modo primieiro");
+        throw QString("Selecione um modo primeiro");
     }
+
     if (textoComboBox == "Todos os alunos de um curso")
     {
         Fm_InserirCurso f_inserirCurso;
@@ -79,14 +91,12 @@ void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std:
                 cont++;
             }
         }
-        parent->setColumnWidth(0, 130);
-        parent->setColumnWidth(1, 610);
-        parent->setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
+
     if (textoComboBox == "Alunos de uma turma")
     {
         Fm_InserirDisciplinaTurma f_inserirDisciplinaTurma;
-        QObject::connect(&f_inserirDisciplinaTurma, &Fm_InserirDisciplinaTurma::infoTransmitida, this, &ExecutarModo::receberInfoDisciplina);
+        QObject::connect(&f_inserirDisciplinaTurma, &Fm_InserirDisciplinaTurma::infoTransmitida, this, &ExecutarModo::receberInfoDisciplinaTurma);
         f_inserirDisciplinaTurma.exec();
         parent->setColumnCount(2);
         QStringList cabecalho = {"Matricula", "Nome"};
@@ -102,25 +112,48 @@ void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std:
                 if (itDisciplina->getDisciplinaTurma() == infoDisciplinaTurma.getDisciplinaTurma())
                 {
                     parent->insertRow(cont);
-                    parent->setItem(cont, 0, new QTableWidgetItem(itDisciplina->getDisciplinaTurma()));
+                    parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
                     parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
                 }
                 ++itDisciplina;
             }
         }
-        parent->setColumnWidth(0, 130);
-        parent->setColumnWidth(1, 610);
-        parent->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
     }
+
     if (textoComboBox == "Alunos de uma disciplina")
     {
-
+        Fm_InserirDisciplina f_inserirDisciplina;
+        QObject::connect(&f_inserirDisciplina, &Fm_InserirDisciplina::infoTransmitida, this, &ExecutarModo::receberInfoDisciplina);
+        f_inserirDisciplina.exec();
+        parent->setColumnCount(2);
+        QStringList cabecalho = {"Matricula", "Nome"};
+        parent->setHorizontalHeaderLabels(cabecalho);
+        std::list<Pedro::Aluno>::iterator it;
+        std::list<Pedro::DisciplinaTurma>::iterator itDisciplina;
+        int cont = 0;
+        for (it = listaAluno.begin(); it != listaAluno.end(); ++it)
+        {
+            itDisciplina = it->getListaDisciplinaTurma()->begin();
+            while (itDisciplina != it->getListaDisciplinaTurma()->end())
+            {
+                if (itDisciplina->getCodigoDisciplina() == infoDisciplina)
+                {
+                    parent->insertRow(cont);
+                    parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
+                    parent->setItem(cont, 1, new QTableWidgetItem(it->getNomeCompleto()));
+                }
+                ++itDisciplina;
+            }
+        }
     }
+
     if (textoComboBox == "Todas as disciplinas de um aluno")
     {
 
     }
+    parent->setColumnWidth(0, 130);
+    parent->setColumnWidth(1, 610);
+    parent->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 }

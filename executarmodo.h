@@ -1,11 +1,12 @@
 #ifndef EXECUTARMODO_H
 #define EXECUTARMODO_H
 
+#include <QDialog>
+#include <QObject>
 #include "disciplinaturma.h"
 #include "aluno.h"
 #include <QTableWidget>
-#include <QDialog>
-#include <QObject>
+#include "fm_inserirdisciplina.h"
 
 namespace Pedro
 {
@@ -18,14 +19,16 @@ private:
     int infoCurso;
     Pedro::DisciplinaTurma infoDisciplinaTurma;
     Pedro::Aluno infoAluno;
+    QString infoDisciplina;
 
 private slots:
     void receberInfo(int infoCurso);
-    void receberInfoDisciplina(Pedro::DisciplinaTurma disciplinaTurma);
+    void receberInfoDisciplinaTurma(Pedro::DisciplinaTurma disciplinaTurma);
+    void receberInfoDisciplina(QString infoDisciplina);
 
 public:
     ExecutarModo();
-    void operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos);
+    void operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos, QString enderecoArquivo);
     int getInfoCurso() const;
     void setInfoCurso(int newInfoCurso);
     Pedro::DisciplinaTurma getInfoDisciplinaTurma() const;

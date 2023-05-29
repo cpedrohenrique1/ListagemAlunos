@@ -14,6 +14,7 @@ SOURCES += \
     disciplinaturma.cpp \
     executarmodo.cpp \
     fm_inserircurso.cpp \
+    fm_inserirdisciplina.cpp \
     fm_inserirdisciplinaturma.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,12 +26,14 @@ HEADERS += \
     disciplinaturma.h \
     executarmodo.h \
     fm_inserircurso.h \
+    fm_inserirdisciplina.h \
     fm_inserirdisciplinaturma.h \
     mainwindow.h \
     matricula.h
 
 FORMS += \
     fm_inserircurso.ui \
+    fm_inserirdisciplina.ui \
     fm_inserirdisciplinaturma.ui \
     mainwindow.ui
 
