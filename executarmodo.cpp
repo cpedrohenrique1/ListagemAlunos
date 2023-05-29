@@ -56,7 +56,7 @@ ExecutarModo::ExecutarModo():
   , infoAluno()
 {}
 
-void ExecutarModo::operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAluno, QString enderecoArquivo)
+void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAluno)
 {
     parent->clearSelection();
     parent->setRowCount(0);

@@ -28,7 +28,7 @@ private slots:
 
 public:
     ExecutarModo();
-    void operator ()(QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos, QString enderecoArquivo);
+    void operator ()(QString enderecoArquivo, QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos);
     int getInfoCurso() const;
     void setInfoCurso(int newInfoCurso);
     Pedro::DisciplinaTurma getInfoDisciplinaTurma() const;

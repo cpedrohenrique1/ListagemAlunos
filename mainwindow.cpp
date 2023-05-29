@@ -36,7 +36,7 @@ void MainWindow::on_pushButton_executarModo_clicked()
 {
     try {
         Pedro::ExecutarModo executarModo;
-        executarModo(ui->comboBox_inputModo->currentText(), ui->tableWidget_output, listaAluno, ui->lineEdit_inputEnderecoArquivo->text());
+        executarModo(ui->lineEdit_inputEnderecoArquivo->text(), ui->comboBox_inputModo->currentText(), ui->tableWidget_output, listaAluno);
     }
     catch (QString &erro) {
         QMessageBox::critical(this, "Erro", erro);
