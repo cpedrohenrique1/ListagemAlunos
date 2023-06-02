@@ -63,9 +63,6 @@ ExecutarModo::ExecutarModo():
 
 void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAluno)
 {
-    parent->clearSelection();
-    parent->setRowCount(0);
-
     if (enderecoArquivo.isEmpty())
     {
         throw QString("Arquivo nao selecionado");
@@ -76,9 +73,12 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
         throw QString("Selecione um modo primeiro");
     }
 
+    parent->clearSelection();
+    parent->setRowCount(0);
+
     if (textoComboBox == "Todos os alunos de um curso")
     {
-        Fm_InserirCurso f_inserirCurso;
+        Fm_InserirCurso f_inserirCurso(nullptr, &listaAluno);
         QObject::connect(&f_inserirCurso, &Fm_InserirCurso::infoTransmitida, this, &ExecutarModo::receberInfo);
         f_inserirCurso.exec();
         parent->setColumnCount(2);

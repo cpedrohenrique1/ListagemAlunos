@@ -1,12 +1,35 @@
 #include "fm_inserircurso.h"
 #include "ui_fm_inserircurso.h"
 #include <QMessageBox>
+#include <algorithm>
 
-Fm_InserirCurso::Fm_InserirCurso(QWidget *parent) :
+Fm_InserirCurso::Fm_InserirCurso(QWidget *parent, std::list<Pedro::Aluno> *listaAluno) :
     QDialog(parent),
     ui(new Ui::Fm_InserirCurso)
 {
     ui->setupUi(this);
+    std::list<Pedro::Aluno>::iterator it;
+    int vetor[2] = {0, 0};
+    for (it = listaAluno->begin(); it != listaAluno->end(); ++it)
+    {
+        int nCurso = it->getMatricula().getNCurso();
+        if (std::find(std::begin(vetor), std::end(vetor), nCurso) == std::end(vetor))
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                if (vetor[i] == 0)
+                {
+                    vetor[i] = nCurso;
+                    break;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        ui->comboBox->addItem(QString::number(vetor[i]));
+    }
 }
 
 Fm_InserirCurso::~Fm_InserirCurso()
@@ -17,19 +40,11 @@ Fm_InserirCurso::~Fm_InserirCurso()
 void Fm_InserirCurso::on_pushButton_clicked()
 {
     try {
-        if (ui->lineEdit_inputNCurso->text().isEmpty())
+        if (ui->comboBox->currentText().isEmpty())
         {
-            throw QString("numero esta vazio");
+            throw QString("Erro, comboBox nao inicializada");
         }
-        QString teste = ui->lineEdit_inputNCurso->text();
-        for (int i = 0; i < teste.size(); i++)
-        {
-            if (teste[i] > '9' || teste[i] < '0')
-            {
-                throw QString("Somente numeros inteiros positivos serao aceitos");
-            }
-        }
-        emit infoTransmitida(ui->lineEdit_inputNCurso->text().toInt());
+        emit infoTransmitida(ui->comboBox->currentText().toInt());
         close();
     }
     catch (QString &erro) {

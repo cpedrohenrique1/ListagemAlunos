@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>200</width>
-    <height>101</height>
+    <width>197</width>
+    <height>98</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Inserir Curso</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>191</width>
+     <width>193</width>
      <height>81</height>
     </rect>
    </property>
@@ -31,7 +31,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_inputNCurso"/>
+     <widget class="QComboBox" name="comboBox"/>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
