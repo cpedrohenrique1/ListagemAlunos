@@ -2,33 +2,23 @@
 #include "ui_fm_inserircurso.h"
 #include <QMessageBox>
 #include <algorithm>
+#include <list>
 
 Fm_InserirCurso::Fm_InserirCurso(QWidget *parent, std::list<Pedro::Aluno> *listaAluno) :
     QDialog(parent),
     ui(new Ui::Fm_InserirCurso)
 {
     ui->setupUi(this);
-    std::list<Pedro::Aluno>::iterator it;
-    int vetor[2] = {0, 0};
-    for (it = listaAluno->begin(); it != listaAluno->end(); ++it)
+    std::list<int> Cursos;
+    for (std::list<Pedro::Aluno>::iterator it = listaAluno->begin(); it != listaAluno->end(); ++it)
     {
-        int nCurso = it->getMatricula().getNCurso();
-        if (std::find(std::begin(vetor), std::end(vetor), nCurso) == std::end(vetor))
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                if (vetor[i] == 0)
-                {
-                    vetor[i] = nCurso;
-                    break;
-                }
-            }
-        }
+        std::list<int>::iterator iterador = std::find(Cursos.begin(), Cursos.end(), it->getMatricula().getNCurso());
+        if (iterador == Cursos.end())
+            Cursos.push_back(it->getMatricula().getNCurso());
     }
-
-    for (int i = 0; i < 2; i++)
+    for (std::list<int>::iterator iterador = Cursos.begin(); iterador != Cursos.end(); ++iterador)
     {
-        ui->comboBox->addItem(QString::number(vetor[i]));
+        ui->comboBox->addItem(QString::number(*iterador));
     }
 }
 

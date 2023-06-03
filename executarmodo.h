@@ -18,24 +18,24 @@ class ExecutarModo : public QDialog
 
 private:
     int infoCurso;
-    Pedro::DisciplinaTurma infoDisciplinaTurma;
+    QString infoDisciplinaTurma;
     Pedro::Aluno infoAluno;
     QString infoDisciplina;
-    Pedro::Matricula infoMatricula;
+    QString infoMatricula;
 
 private slots:
     void receberInfo(int infoCurso);
-    void receberInfoDisciplinaTurma(Pedro::DisciplinaTurma disciplinaTurma);
+    void receberInfoDisciplinaTurma(QString disciplinaTurma);
     void receberInfoDisciplina(QString infoDisciplina);
-    void receberInfoMatricula(Pedro::Matricula infoMatricula);
+    void receberInfoMatricula(QString infoMatricula);
 
 public:
     ExecutarModo();
     void operator ()(QString enderecoArquivo, QString textoComboBox, QTableWidget* parent, std::list<Pedro::Aluno> listaAlunos);
     int getInfoCurso() const;
     void setInfoCurso(int newInfoCurso);
-    Pedro::DisciplinaTurma getInfoDisciplinaTurma() const;
-    void setInfoDisciplinaTurma(Pedro::DisciplinaTurma newInfoDisciplinaTurma);
+    QString getInfoDisciplinaTurma() const;
+    void setInfoDisciplinaTurma(QString newInfoDisciplinaTurma);
     Pedro::Aluno getInfoAluno() const;
     void setInfoAluno(Pedro::Aluno newInfoAluno);
 };

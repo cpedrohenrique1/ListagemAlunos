@@ -15,12 +15,12 @@ void ExecutarModo::setInfoCurso(int newInfoCurso)
     infoCurso = newInfoCurso;
 }
 
-Pedro::DisciplinaTurma ExecutarModo::getInfoDisciplinaTurma() const
+QString ExecutarModo::getInfoDisciplinaTurma() const
 {
     return infoDisciplinaTurma;
 }
 
-void ExecutarModo::setInfoDisciplinaTurma(Pedro::DisciplinaTurma newInfoDisciplinaTurma)
+void ExecutarModo::setInfoDisciplinaTurma(QString newInfoDisciplinaTurma)
 {
     infoDisciplinaTurma = newInfoDisciplinaTurma;
 }
@@ -45,12 +45,12 @@ void ExecutarModo::receberInfoDisciplina(QString infoDisciplina)
     this->infoDisciplina = infoDisciplina;
 }
 
-void ExecutarModo::receberInfoMatricula(Matricula infoMatricula)
+void ExecutarModo::receberInfoMatricula(QString infoMatricula)
 {
     this->infoMatricula = infoMatricula;
 }
 
-void ExecutarModo::receberInfoDisciplinaTurma(Pedro::DisciplinaTurma disciplinaTurma)
+void ExecutarModo::receberInfoDisciplinaTurma(QString disciplinaTurma)
 {
     this->infoDisciplinaTurma = disciplinaTurma;
 }
@@ -100,7 +100,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
 
     if (textoComboBox == "Alunos de uma turma")
     {
-        Fm_InserirDisciplinaTurma f_inserirDisciplinaTurma;
+        Fm_InserirDisciplinaTurma f_inserirDisciplinaTurma(nullptr, &listaAluno);
         QObject::connect(&f_inserirDisciplinaTurma, &Fm_InserirDisciplinaTurma::infoTransmitida, this, &ExecutarModo::receberInfoDisciplinaTurma);
         f_inserirDisciplinaTurma.exec();
         parent->setColumnCount(2);
@@ -114,7 +114,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
             itDisciplina = it->getListaDisciplinaTurma()->begin();
             while (itDisciplina != it->getListaDisciplinaTurma()->end())
             {
-                if (itDisciplina->getDisciplinaTurma() == infoDisciplinaTurma.getDisciplinaTurma())
+                if (itDisciplina->getDisciplinaTurma() == infoDisciplinaTurma)
                 {
                     parent->insertRow(cont);
                     parent->setItem(cont, 0, new QTableWidgetItem(it->getMatricula()));
@@ -128,7 +128,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
 
     if (textoComboBox == "Alunos de uma disciplina")
     {
-        Fm_InserirDisciplina f_inserirDisciplina;
+        Fm_InserirDisciplina f_inserirDisciplina(nullptr, &listaAluno);
         QObject::connect(&f_inserirDisciplina, &Fm_InserirDisciplina::infoTransmitida, this, &ExecutarModo::receberInfoDisciplina);
         f_inserirDisciplina.exec();
         parent->setColumnCount(2);
@@ -158,7 +158,7 @@ void ExecutarModo::operator ()(QString enderecoArquivo, QString textoComboBox, Q
 
     if (textoComboBox == "Todas as disciplinas de um aluno")
     {
-        Fm_InserirMatricula f_inserirMatricula;
+        Fm_InserirMatricula f_inserirMatricula(nullptr, &listaAluno);
         QObject::connect(&f_inserirMatricula, &Fm_InserirMatricula::infoTransmitida, this, &ExecutarModo::receberInfoMatricula);
         f_inserirMatricula.exec();
         parent->setColumnCount(1);

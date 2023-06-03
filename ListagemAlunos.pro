@@ -17,7 +17,6 @@ SOURCES += \
     fm_inserirdisciplina.cpp \
     fm_inserirdisciplinaturma.cpp \
     fm_inserirmatricula.cpp \
-    inserirmatricula.cpp \
     main.cpp \
     mainwindow.cpp \
     matricula.cpp
@@ -31,7 +30,6 @@ HEADERS += \
     fm_inserirdisciplina.h \
     fm_inserirdisciplinaturma.h \
     fm_inserirmatricula.h \
-    inserirmatricula.h \
     mainwindow.h \
     matricula.h
 

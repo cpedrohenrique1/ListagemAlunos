@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>227</width>
-    <height>120</height>
+    <width>229</width>
+    <height>110</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit_inputCodigoDisciplina"/>
+     <widget class="QComboBox" name="comboBox"/>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
